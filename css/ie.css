@@ -1,0 +1,5 @@
+/* IE animation fix */
+
+.skills .inner-bar {
+	display: block !important;
+}
