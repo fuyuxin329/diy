@@ -1,415 +1,258 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
-<title>游卡个人简历-付宇鑫</title>
-
-<link rel="stylesheet" href="css/style.css">
-
+<title>国庆倒计时</title>
 </head>
-<body>
+<body background="beijing">
 <audio controls autoplay loop hidden>
     <source src="mp3/yinyue.mp3">
 </audio>
-
 <div id="background" class="wall"></div>
 <div id="midground" class="wall"></div>
 <div id="foreground" class="wall"></div>
 <div id="top" class="wall"></div>
 <div style="text-align:center;">
+
+<!doctype html>
+<html>
+
+<link rel="stylesheet" href="css/style.css">
+<head>
+<meta charset="utf-8">
+<title>国庆倒计时</title>
+
+<style>
+@import url("https://fonts.googleapis.com/css?family=Aleo");
+
+:root {
+  font-family: "Aleo", sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background: rgb(119, 13, 13);
+  background: radial-gradient(
+    circle,
+    rgba(119, 13, 13, 0.92) 64%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+
+.label {
+  font-size: 2.2rem;
+  background: url("img/6368077651977322227241996.png");
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: moveBg 30s linear infinite;
+}
+
+@keyframes moveBg {
+  0% {
+    background-position: 0% 30%;
+  }
+  100% {
+    background-position: 1000% 500%;
+  }
+}
+
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  user-select: none;
+}
+
+.time {
+  color: #d99c3b;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+}
+
+.time span {
+  padding: 0 14px;
+  font-size: 0.8rem;
+}
+
+.time span div {
+  font-size: 3rem;
+}
+
+@media (max-width: 740px) {
+  .label {
+    font-size: 1.7rem;
+  }
+  .time span {
+    padding: 0 16px;
+    font-size: 0.6rem;
+  }
+  .time span div {
+    font-size: 2rem;
+  }
+}
+</style>
+</head>
+<body>
+<div class="middle">
+	<h1 class="label">距离祖国母亲生日还有</h1>
+	<div class="time">
+		<span>
+		<div id="d">
+			00
+		</div>
+		天 </span> <span>
+		<div id="h">
+			00
+		</div>
+		小时 </span> <span>
+		<div id="m">
+			00
+		</div>
+		分钟 </span> <span>
+		<div id="s">
+			00
+		</div>
+		秒 </span>
+	</div>
+</div>
+
+<script>
+class Snowflake {
+  constructor() {
+    this.x = 0;
+    this.y = 0;
+    this.vx = 0;
+    this.vy = 0;
+    this.radius = 0;
+    this.alpha = 0;
+
+    this.reset();
+  }
+
+  reset() {
+    this.x = this.randBetween(0, window.innerWidth);
+    this.y = this.randBetween(0, -window.innerHeight);
+    this.vx = this.randBetween(-3, 3);
+    this.vy = this.randBetween(2, 5);
+    this.radius = this.randBetween(1, 4);
+    this.alpha = this.randBetween(0.1, 0.9);
+  }
+
+  randBetween(min, max) {
+    return min + Math.random() * (max - min);
+  }
+
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+
+    if (this.y + this.radius > window.innerHeight) {
+      this.reset();
+    }
+  }
+}
+
+class Snow {
+  constructor() {
+    this.canvas = document.createElement("canvas");
+    this.ctx = this.canvas.getContext("2d");
+
+    document.body.appendChild(this.canvas);
+
+    window.addEventListener("resize", () => this.onResize());
+    this.onResize();
+    this.updateBound = this.update.bind(this);
+    requestAnimationFrame(this.updateBound);
+
+    this.createSnowflakes();
+  }
+
+  onResize() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    this.canvas.width = this.width;
+    this.canvas.height = this.height;
+  }
+
+  createSnowflakes() {
+    const flakes = window.innerWidth / 4;
+
+    this.snowflakes = [];
+
+    for (let s = 0; s < flakes; s++) {
+      this.snowflakes.push(new Snowflake());
+    }
+  }
+
+  update() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
+
+    for (let flake of this.snowflakes) {
+      flake.update();
+
+      this.ctx.save();
+      this.ctx.fillStyle = "#FFF";
+      this.ctx.beginPath();
+      this.ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+      this.ctx.closePath();
+      this.ctx.globalAlpha = flake.alpha;
+      this.ctx.fill();
+      this.ctx.restore();
+    }
+    requestAnimationFrame(this.updateBound);
+  }
+}
+
+new Snow();
+
+
+////////////////////////////////////////////////////////////
+
+// Simple CountDown Clock
+
+const comingdate = new Date("October 1, 2019 00:00:00");
+
+const d = document.getElementById("d");
+const h = document.getElementById("h");
+const m = document.getElementById("m");
+const s = document.getElementById("s");
+
+const countdown = setInterval(() => {
+  const now   = new Date();
+  const des   = comingdate.getTime() - now.getTime();
+  const days  = Math.floor(des / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((des % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins  = Math.floor((des % (1000 * 60 * 60)) / (1000 * 60));
+  const secs  = Math.floor((des % (1000 * 60)) / 1000);
+
+  d.innerHTML = getTrueNumber(days);
+  h.innerHTML = getTrueNumber(hours);
+  m.innerHTML = getTrueNumber(mins);
+  s.innerHTML = getTrueNumber(secs);
+
+  if (x <= 0) clearInterval(x);
+}, 1000);
+
+const getTrueNumber = x => (x < 10 ? "0" + x : x);
+</script>
+<div style="text-align:center;">
 <p><a href="http://www.mycodes.net/" target="_blank"></a></p>
 </div>
-
-<div class="themeswitcher">
-
-	<p><i class="icon-cogs"></i></p>
-
-	<ul class="selector">
-
-		<li><img data-nr="0" src="ts/preview/bg_1.png" /></li>
-
-		<li><img data-nr="1" src="ts/preview/bg_2.png" /></li>
-
-		<li><img data-nr="2" src="ts/preview/bg_3.png" /></li>
-
-		<li><img data-nr="3" src="ts/preview/bg_4.png" /></li>
-
-		<li><img data-nr="4" src="ts/preview/bg_5.png" /></li>
-
-
-
-
-	</ul>
-
-</div>
-
-<div class="panorama"><img class="p_img" src="images/panorama/new_york.jpg" alt="panorama" /></div>
-
-	<div class="wrapper">
-
-		<header>
-
-			<h1><a class="no-animation" href="#"> FYX</a></h1>
-
-			<h2> 河南省/ 郑州工业应用技术学院/ 本科毕业生</h2> 
-
-			<div class="clear"></div>
-
-		</header>
-
-		<section class="content">
-
-		<ul class="social-media">
-
-			<li><a class="no-animation" href="#"><i class="icon-facebook-sign"></i></a></li>
-
-			<li><a class="no-animation" href="#"><i class="icon-twitter-sign"></i></a></li>
-			
-			<li><a class="no-animation" href="#"><i class="icon-google-plus-sign"></i></a></li>
-
-
-		</ul>
-
-		<ul class="content-list">
-
-			<li class="list-home"> <!-- home start -->
-
-			<div class="column">
-
-				<div class="g_15 f_right">
-
-					<img class="portrait" src="images/portrait.png" alt="portrait" />
-
-				</div>
-
-
-				<div class="g_15 f_left">
-
-					<blockquote class="about">
-“真理惟一可靠的标准就是永远自相符合。”  <br />
-						<p>──欧文</p>
-					</blockquote>
-
-					<p class="about_me">Hi, I am FYX!<br /><br /> I love to create Websites and Wordpress Themes. <br />I know Photoshop off pat, realize my concepts with my distinct knowledge in CSS and HTML.<br />
-					<i>Interested?</i> <br />Take a look at my Portfolio!</p>
-
-				</div>
-
-			</div>
-			
-			<div class="inner_copyright">Collect from <a href="http://www.mycodes.net/" target="_blank" title="FYX">简历</a></div>
-
-			<div class="column p_top_none">
-
-				<div class="g_15 g_620_padding">
-
-					<h3 class="heading"><span>+</span> 工作经验<span><i class="icon-briefcase"></i></span></h3>
-
-					<ul class="工作经验">
-
-						<li class="time">2016 - 现在</li>
-
-						<li class="company"><span>会一些简单的HTML编辑</span></li>
-
-						<li class="work">喜欢探究，热爱游卡，可以给公司的发展提供一些建议</li>
-
-						<li class="work">精通电脑安卓iOS操作</li>
-
-					</ul>
-
-					<ul class="工作经验">
-
-						<li class="time">阅读能力良好，为人和善</li>
-
-						<li class="company"><span></span></li>
-
-						<li class="work">会一些ios开发和安卓反编译</li>
-
-						<li class="work">熟练运用Photoshop</li>
-
-					</ul>
-
-				</div>
-
-				<div class="g_15 g_620_padding">
-
-					<h3 class="heading"><span>+</span> 技能 <span><i class="icon-cloud"></i></span></h3>
-
-						<table class="skills">
-
-							<tr>
-								<td class="desc">Photoshop</td><td><div class="outer-bar"><div class="inner-bar" style="width: 60%"></div></div></td>
-							</tr>
-
-							<tr>
-								<td class="desc">IOS</td><td><div class="outer-bar"><div class="inner-bar" style="width: 70%"></div></div></td>
-							</tr>
-
-							<tr>
-								<td class="desc">CSS</td><td><div class="outer-bar"><div class="inner-bar" style="width: 90%"></div></div></td>
-							</tr>
-
-							<tr>
-								<td class="desc">PHP/MySQL</td><td><div class="outer-bar"><div class="inner-bar" style="width: 20%"></div></div></td>
-							</tr>
-
-						</table>
-
-					<h3 class="heading"><span>+</span> 就读院校 <span><i class="icon-book"></i></span></h3>
-
-						<ul class="education">
-
-							<li class="time">2016 - 2019</li>
-
-							<li class="institution"><span>郑州工业应用技术学院</span></li>
-
-							<li class="grade">信息工程学院通信工程专业</li>
-
-						</ul>
-
-				</div>
-
-			</div>
-
-			</li><!-- home end -->
-
-			<li class="list-portfolio"> <!-- portfolio start -->
-
-				<div class="column">
-
-					<div class="g_3">
-
-						<h1 class="heading">Portfolio!</h1>
-
-						<p>Here is a selection of my work. Filter the items by clicking on the terms below.<br />Contact me for more examples and enjoy the tour!</p>
-
-						<ul class="isotope-filter">
-
-							<li><i class="icon-circle-arrow-right"></i> <a href="#" data-filter="*">all</a></li>
-
-							<li><i class="icon-circle-arrow-right"></i> <a href="#" data-filter=".web">webdesign</a></li>
-
-							<li><i class="icon-circle-arrow-right"></i> <a href="#" data-filter=".print">print</a></li>
-
-							<li><i class="icon-circle-arrow-right"></i> <a href="#" data-filter=".ads">advertising</a></li>
-
-						</ul>					
-
-						<div class="isotope-portfolio">
-
-							<!-- Item 1 -->
-
-							<div class="item web ads">
-
-								<div class="item-slider img">
-									<a class="fancybox img" href="images/portfolio/newyork_2010.jpg"></a>
-								</div>
-
-								<img src="images/portfolio/newyork_2010_thumb.jpg" alt="" />
-
-								<div class="item-name">New York</div>
-
-							</div>
-
-							<!-- Item 2 -->
-
-							<div class="item print web">
-
-								<div class="item-slider img">
-									<a class="fancybox img" href="images/portfolio/nyc_taxi.jpg"></a>
-								</div>
-
-								<img src="images/portfolio/nyc_taxi_thumb.jpg" alt="" />
-
-								<div class="item-name">Yellow Cab</div>
-
-							</div>
-
-							<!-- Item 3 -->
-
-							<div class="item print">
-
-								<div class="item-slider img">
-									<a class="fancybox img" href="images/portfolio/nyc_streets.jpg"></a>
-								</div>
-
-								<img src="images/portfolio/nyc_streets_thumb.jpg" alt="" />
-
-								<div class="item-name">Streets</div>
-
-							</div>
-
-							<!-- Item 4 -->
-
-							<div class="item ads print">
-
-								<div class="item-slider img">
-									<a class="fancybox img" href="images/portfolio/linux_print.jpg"></a>
-								</div>
-
-								<img src="images/portfolio/linux_print_thumb.jpg" alt="" />
-
-								<div class="item-name">Linux</div>
-
-							</div>
-
-							<!-- Item 5 -->
-
-							<div class="item web ads">
-
-								<div class="item-slider img">
-									<a class="fancybox img" href="images/portfolio/nyc_timesquare.jpg"></a>
-								</div>
-
-								<img src="images/portfolio/nyc_timesquare_thumb.jpg" alt="" />
-
-								<div class="item-name">Timesquare</div>
-
-							</div>
-
-							<!-- Item 6 -->
-
-							<div class="item web">
-
-								<div class="item-slider img">
-									<a class="fancybox img" href="images/portfolio/nyc_traffic_lights.jpg"></a>
-								</div>
-
-								<img src="images/portfolio/nyc_traffic_lights_thumb.jpg" alt="" />
-
-								<div class="item-name">Streets</div>
-
-							</div>
-
-							<!-- Item 7 -->
-
-							<div class="item print ads">
-
-								<div class="item-slider img">
-									<a class="fancybox img" href="images/portfolio/wallstreet_2010.jpg"></a>
-								</div>
-
-								<img src="images/portfolio/wallstreet_2010_thumb.jpg" alt="" />
-
-								<div class="item-name">Streets</div>
-
-							</div>
-
-						<div class="clear"></div>
-
-						</div> <!-- end of portfolio -->
-
-						<div class="clear"></div>
-
-					</div>
-
-				</div>
-
-			</li> <!-- portfolio end -->
-
-			<li class="list-contact"> <!-- contact start -->
-
-				<div class="google-maps"></div>
-
-				<div class="column">
-
-					<div class="g_2">
-
-						<h1 class="heading">Contact Form</h1>
-
-						<p>To contact me you can hit my up on the various social networks or contact me in person. Use the contact form below. I usually reply within 24 hours.</p>
-
-					</div>
-
-					<div class="g_1">
-
-						<address>
-
-						<ul class="contact-info">
-
-							<li><i class="icon-envelope"></i> <a href="mailto:your@email.com">jd@johndoe.com</a></li>
-
-							<li><i class="icon-globe"></i> <a href="#">www.johndoe.com</a></li>
-
-							<li><i class="icon-map-marker"></i> Elizabeth St 210, Melbourne</li>
-
-							<li><i class="icon-phone"></i> +44 6748 7832 32</li>
-
-						</ul>
-
-					</address>
-
-					</div>
-					
-				</div>	
-
-				<div class="column p_top_none">	
-
-					<div class="g_3">
-
-						<form id="contact" action="" method="POST" />
-
-							<div class="icon-wrapper">
-
-								<p>
-									<i class="icon-ok"></i><br />
-									Thanks! - I will reply as soon as possible! No spam for sure!
-								</p>
-
-							</div>
-
-							<p><label for="name">Name: *</label></p>
-
-							<p><input type="text" name="contact_name" id="name" class="c_name required" /></p>
-
-							<p><label for="email">E-Mail: *</label></p>
-
-							<p><input type="email" name="contact_email" id="email" class="c_email required email" /></p>
-
-							<p><label for="message">Message: *</label></p>
-
-							<p><textarea name="contact_message" id="message" class="c_message required"></textarea></p>
-
-							<p><input name="submit" type="submit" value="Send it!" /></p>
-
-						</form>
-
-					</div>	
-
-				</div>
-
-			</li> <!-- contact end -->
-
-			<li>
-
-			<ul class="navigation">
-
-				<li class="home"><i class="icon-home"></i><p>Home</p></li>
-
-				<li class="portfolio" id="portfolio"><i class="icon-table"></i><p>Portfolio</p></li>
-
-				<li id="gmap" class="contact"><i class="icon-envelope"></i><p>Contact</p></li>
-
-			</ul>
-
-			</li>
-
-			<li>
-
-				<div class="clear"></div>
-
-			</li>
-
-		</ul>
-
-		</section>
-
-	</div>
-
-<script type="text/javascript" src="ts/themeswitcher.js"></script>
-<a href="https://github.com/fuyuxin329?tab=repositories" target="_blank" title="B-">FYX制作</a>
-	
 </body>
 </html>
