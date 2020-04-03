@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>APPDEADLINE</key>
+	<string>1626965978</string>
+	<key>APPUDKEY</key>
+	<string>YVtSCnZHGAgOCGgNBQp2FU4OXQ08XgUOexYbWw9db1tQVycVHwELCA==</string>
+	<key>NOTNETWORKNUM</key>
+	<string>0</string>
+	<key>REAPPFUND</key>
+	<string>NO</string>
+	<key>installAppTagid</key>
+	<string>111111001</string>
+	<key>installschemes</key>
+	<string>xiaocZBK</string>
+	<key>installtitle</key>
+	<string>小C安装器</string>
+	<key>installwebsite</key>
+	<string>https://www.xiaocsy.com</string>
+</dict>
+</plist>
